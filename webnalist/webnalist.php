@@ -18,9 +18,9 @@ function wn_the_content_filter($content)
     $post_id = get_the_ID();
     $url = get_post_permalink($post_id);
     $read = '<p class="wn-read-with-webnalist"><a class="wn-item" data-wn-url="' . $url . '" href="#">Przeczytaj za <span class="wn-price">...</span> z Webnalist.com &raquo;</a></p>';
-
+    $wnStatus = get_post_meta($post_id, 'wn_status', true);
     if (!is_single()) {
-        if (get_post_meta($post_id, 'wn_status', true)) {
+        if ($wnStatus) {
             return $content . $read;
         } else {
             return $content;
@@ -49,13 +49,15 @@ function wn_the_content_filter($content)
         return wn_full($post_id);
     }
     $output = get_the_content();
+
     if ($error) {
         $output .= '<p class="wn-error" style="color:darkred; padding-top:30px;">' . $error . '</p>';
     }
-    $output .= $read;
+    if ($wnStatus) {
+        $output .= $read;
+    }
 
     return $output;
-
 }
 
 function wn_full($post_id)
