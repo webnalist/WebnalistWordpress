@@ -1,8 +1,4 @@
 <?php
-/**
- * @package Webnalist
- * @version 1.0
- */
 /*
 Plugin Name: Webnalist
 Plugin URI: http://webnalist.com
@@ -11,7 +7,6 @@ Author: Webnalist sp. z o.o.
 Version: 1.0 Alpha
 Author URI: http://webnalist.com
 */
-define('WN_ITEM_CLASS', 'wn-item');
 
 function wn_init()
 {
@@ -20,39 +15,42 @@ function wn_init()
 
 function wn_the_content_filter($content)
 {
-    if (!is_single()) {
-
-    }
     $post_id = get_the_ID();
-    $url = get_post_permalink($post_id);
-    define('WN_KEY_PUBLIC', ''); //your webnalist brand public key
-    define('WN_KEY_PRIVATE', ''); //your webnalist brand private key
-    define('SANDBOX_MODE', true);
+    if (!is_single() || !get_post_meta($post_id, 'wn_status', true)) {
+        return $content;
+    }
     include_once('lib/WebnalistBackend/WebnalistBackend.php');
-    $webnalist = new WebnalistBackend(WN_KEY_PUBLIC, WN_KEY_PRIVATE, SANDBOX_MODE, SANDBOX_MODE);
+    $wn_settings = get_option('wn_settings');
+    $url = get_post_permalink($post_id);
+    $publicKey = isset($wn_settings['wn_public_key']) ? $wn_settings['wn_public_key'] : '';
+    $privateKey = isset($wn_settings['wn_private_key']) ? $wn_settings['wn_private_key'] : '';
+    $sandboxMode = isset($wn_settings['wn_sandbox']) ? $wn_settings['wn_sandbox'] : 0;
+    $printDebugMode = isset($wn_settings['wn_debug']) ? $wn_settings['wn_debug'] : 0;
+    $webnalist = new WebnalistBackend($publicKey, $privateKey, $printDebugMode, $sandboxMode);
     if (SANDBOX_MODE) {
         $webnalist->setUrl(plugins_url() . '/webnalist/lib/WebnalistBackend/demo'); //only for sandbox, skip this on production mode
     }
     $isPurchased = false;
     $error = null;
+
     try {
         $isPurchased = $webnalist->canRead($url);
     } catch (WebnalistException $we) {
         $error = $we->getMessage();
+        //@todo dodać tłumaczenia błędów na podstawie kodów
     }
 
     if ($isPurchased && !$error) {
         return wn_full($post_id);
-    } else {
-        $output = get_the_content();
-        if ($error) {
-            $output .= '<p class="wn-error">' . $error . '</p>';
-        }
-        $output .= '<p class="wn-read-with-webnalist"><a class="wn-item" data-wn-url="' . get_permalink() . '" href="#">Przeczytaj za <span class="wn-price">...</span> z Webnalist.com &raquo;</a></p>';
-
-
-        return $output;
     }
+
+    $output = get_the_content();
+    if ($error) {
+        $output .= '<p class="wn-error">' . $error . '</p>';
+    }
+    $output .= '<p class="wn-read-with-webnalist"><a class="wn-item" data-wn-url="' . get_permalink() . '" href="#">Przeczytaj za <span class="wn-price">...</span> z Webnalist.com &raquo;</a></p>';
+
+    return $output;
 
 }
 
@@ -191,8 +189,11 @@ function wn_add_scripts()
 
 function wn_config_script()
 {
-    echo '
-    <script>
+    $wn_settings = get_option('wn_settings');
+    $sandboxMode = isset($wn_settings['wn_sandbox']) ? $wn_settings['wn_sandbox'] : 0;
+    if ($sandboxMode) {
+        echo '
+<script>
     var WN = WN || {};
     WN.options = {
         loadPrices: true,
@@ -202,6 +203,14 @@ function wn_config_script()
     };
 </script>
 ';
+    } else {
+        echo '
+<script>
+    var WN = WN || {};
+    WN.options = { loadPrices: true };
+</script>
+';
+    }
 }
 
 function wn_post_meta_boxes_setup()
@@ -213,10 +222,9 @@ function wn_post_meta_boxes_setup()
 function wn_add_admin_menu()
 {
 
-    add_menu_page('Webnalist.com', 'Webnalist.com', 'manage_options', 'webnalist', 'webnalist_options_page');
+    add_menu_page('Webnalist.com', 'Webnalist.com', 'manage_options', 'webnalist', 'wn_options_page');
 
 }
-
 
 function wn_settings_init()
 {
@@ -261,6 +269,22 @@ function wn_settings_init()
         'webnalist',
         'wn_webnalist_section'
     );
+
+    add_settings_field(
+        'wn_debug',
+        __('Tryb debugowania', 'webnalist'),
+        'wn_debug_render',
+        'webnalist',
+        'wn_webnalist_section'
+    );
+
+    add_settings_field(
+        'wn_sandbox',
+        __('Tryb sandbox', 'webnalist'),
+        'wn_sandbox_render',
+        'webnalist',
+        'wn_webnalist_section'
+    );
 }
 
 
@@ -288,7 +312,6 @@ function wn_secret_key_render()
 
 function wn_default_price_render()
 {
-
     $options = get_option('wn_settings');
     ?>
     <input class="small-text" type='number' min="1" max="700" step="1" name='wn_settings[wn_default_price]'
@@ -309,12 +332,32 @@ function wn_is_paid_default_render()
 
 }
 
+function wn_debug_render()
+{
+    $options = get_option('wn_settings');
+    ?>
+    <input type='checkbox' name='wn_settings[wn_debug]' <?php checked($options['wn_debug'], 1); ?>
+           value='1'>
+<?php
+
+}
+
+function wn_sandbox_render()
+{
+    $options = get_option('wn_settings');
+    ?>
+    <input type='checkbox' name='wn_settings[wn_sandbox]' <?php checked($options['wn_sandbox'], 1); ?>
+           value='1'>
+<?php
+
+}
+
 function wn_settings_section_callback()
 {
     echo __('Requests for the merchant account: admin@webnalist.com', 'webnalist');
 }
 
-function webnalist_options_page()
+function wn_options_page()
 {
     ?>
     <form action="options.php" method="post">
