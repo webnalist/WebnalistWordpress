@@ -16,7 +16,7 @@ function wn_init()
 function wn_the_content_filter($content)
 {
     $post_id = get_the_ID();
-    $url = get_post_permalink($post_id);
+    $url = get_permalink($post_id);
     $read = '<p class="wn-read-with-webnalist"><a class="wn-item" data-wn-url="' . $url . '" href="#">Przeczytaj za <span class="wn-price">...</span> z Webnalist.com &raquo;</a></p>';
     $wnStatus = get_post_meta($post_id, 'wn_status', true);
     if (!is_single()) {
@@ -62,7 +62,7 @@ function wn_the_content_filter($content)
 
 function wn_full($post_id)
 {
-    $wnPaid = '<div class="wn-paid">Artykuł kupiony przez Webnalist.com. <a href="https://webnalist.com/czytelnik">Twoje konto <strong>Webnalist</strong></Strong>.</a></div>';
+    $wnPaid = '<div class="wn-paid">Artykuł kupiony przez Webnalist.com. <a href="https://webnalist.com/czytelnik" target="_blank">Twoje konto <strong>Webnalist</strong></Strong>.</a></div>';
     $output = $wnPaid;
     $output .= get_the_content();
     $output .= '<div class="wn-paid-content-container" style="padding-top:20px;">' . get_post_meta($post_id, 'wn_paid_content', true) . '</div>';
