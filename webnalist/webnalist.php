@@ -16,39 +16,39 @@ function wn_init()
 function wn_the_content_filter($content)
 {
     $post_id = get_the_ID();
+    $url = get_post_permalink($post_id);
+    $read = '<p class="wn-read-with-webnalist"><a class="wn-item" data-wn-url="' . $url . '" href="#">Przeczytaj za <span class="wn-price">...</span> z Webnalist.com &raquo;</a></p>';
+
     if (!is_single() || !get_post_meta($post_id, 'wn_status', true)) {
-        return $content;
+        return $content . $read;
     }
+
     include_once('lib/WebnalistBackend/WebnalistBackend.php');
     $wn_settings = get_option('wn_settings');
-    $url = get_post_permalink($post_id);
     $publicKey = isset($wn_settings['wn_public_key']) ? $wn_settings['wn_public_key'] : '';
     $privateKey = isset($wn_settings['wn_private_key']) ? $wn_settings['wn_private_key'] : '';
     $sandboxMode = isset($wn_settings['wn_sandbox']) ? $wn_settings['wn_sandbox'] : 0;
     $printDebugMode = isset($wn_settings['wn_debug']) ? $wn_settings['wn_debug'] : 0;
     $webnalist = new WebnalistBackend($publicKey, $privateKey, $printDebugMode, $sandboxMode);
-    if (SANDBOX_MODE) {
+    if ($sandboxMode) {
         $webnalist->setUrl(plugins_url() . '/webnalist/lib/WebnalistBackend/demo'); //only for sandbox, skip this on production mode
     }
     $isPurchased = false;
     $error = null;
-
     try {
         $isPurchased = $webnalist->canRead($url);
     } catch (WebnalistException $we) {
         $error = $we->getMessage();
         //@todo dodać tłumaczenia błędów na podstawie kodów
     }
-
     if ($isPurchased && !$error) {
         return wn_full($post_id);
     }
-
     $output = get_the_content();
     if ($error) {
         $output .= '<p class="wn-error" style="color:darkred; padding-top:30px;">' . $error . '</p>';
     }
-    $output .= '<p class="wn-read-with-webnalist"><a class="wn-item" data-wn-url="' . get_permalink() . '" href="#">Przeczytaj za <span class="wn-price">...</span> z Webnalist.com &raquo;</a></p>';
+    $output .= $read;
 
     return $output;
 
