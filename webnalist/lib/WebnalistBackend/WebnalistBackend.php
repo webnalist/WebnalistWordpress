@@ -145,7 +145,7 @@ class WebnalistBackend
             if ($this->debug) {
                 var_dump('response', $response);
             }
-            if ($response->isAllowed) {
+            if ($response->is_allowed) {
                 return true;
             } else {
                 throw new WebnalistException($response->message);
