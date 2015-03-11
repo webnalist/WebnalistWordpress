@@ -46,7 +46,7 @@ function wn_the_content_filter($content)
 
     $output = get_the_content();
     if ($error) {
-        $output .= '<p class="wn-error">' . $error . '</p>';
+        $output .= '<p class="wn-error" style="color:darkred; padding-top:30px;">' . $error . '</p>';
     }
     $output .= '<p class="wn-read-with-webnalist"><a class="wn-item" data-wn-url="' . get_permalink() . '" href="#">Przeczytaj za <span class="wn-price">...</span> z Webnalist.com &raquo;</a></p>';
 
