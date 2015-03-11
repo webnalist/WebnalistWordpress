@@ -19,8 +19,12 @@ function wn_the_content_filter($content)
     $url = get_post_permalink($post_id);
     $read = '<p class="wn-read-with-webnalist"><a class="wn-item" data-wn-url="' . $url . '" href="#">Przeczytaj za <span class="wn-price">...</span> z Webnalist.com &raquo;</a></p>';
 
-    if (!is_single() || !get_post_meta($post_id, 'wn_status', true)) {
-        return $content . $read;
+    if (!is_single()) {
+        if (get_post_meta($post_id, 'wn_status', true)) {
+            return $content . $read;
+        } else {
+            return $content;
+        }
     }
 
     include_once('lib/WebnalistBackend/WebnalistBackend.php');
