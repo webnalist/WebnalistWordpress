@@ -342,6 +342,7 @@ function wn_settings_section_callback()
 {
     echo __('Requests for the merchant account: admin@webnalist.com', 'webnalist');
 }
+
 function wn_options_page()
 {
     ?>
@@ -358,6 +359,11 @@ function wn_options_page()
     </form>
     <?php
 
+}
+
+function wn_item_class()
+{
+    return 'wn-item';
 }
 
 if (is_admin()) {
