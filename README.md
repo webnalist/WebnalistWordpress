@@ -1,7 +1,7 @@
 #Webnalist Wordpress Plugin
 
 ## Instrukcja instalacji:
-- Pobierz plugin z [archiwum z pluginem](https://github.com/webnalist/WebnalistWordpress/archive/master.zip)
+- [Pobierz plugin](https://github.com/webnalist/WebnalistWordpress/archive/master.zip)
 - Wypakuj pobrany plik do katalogu z instalacją Wordpress tak by katalog *webnalist* z archiwum znajdował się w katalogu *wp-content/plugins*
 - Przejdź do panelu administracyjnego Wordpress, w zakładce Pluginy kliknij Aktywuj przy pozycji Webnalist
 - Zaloguj się do swojego panelu wydawcy w serwisie https://merchant.webnalist.com
