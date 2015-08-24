@@ -18,4 +18,4 @@
 - Pisz ciekawe teksty i zarabiaj z Webnalist :)
 
 ### Zobacz również:
-[Informacje dla dziennikarzy](https://webnalist.com/journalists)
+- [Informacje dla dziennikarzy](https://webnalist.com/journalists)
