@@ -268,7 +268,7 @@ function wn_settings_init()
 
     add_settings_field(
         'wn_popup',
-        __('Tryb debugowania', 'webnalist'),
+        __('Okienko popup', 'webnalist'),
         'wn_popup_render',
         'webnalist',
         'wn_webnalist_section'
