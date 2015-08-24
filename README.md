@@ -2,11 +2,11 @@
 
 ## Instrukcja instalacji:
 - Pobierz plugin z [archiwum z pluginem](https://github.com/webnalist/WebnalistWordpress/archive/master.zip)
-- Wypakuj pobrany plik do katalogu z instalacją Wordpress tak by katalog Webnalist z archiwum znajdował się w katalogu wp-content/plugins
+- Wypakuj pobrany plik do katalogu z instalacją Wordpress tak by katalog *webnalist* z archiwum znajdował się w katalogu *wp-content/plugins*
+- Przejdź do panelu administracyjnego Wordpress, w zakładce Pluginy kliknij Aktywuj przy pozycji Webnalist
 - Zaloguj się do swojego panelu wydawcy w serwisie https://merchant.webnalist.com
 - W zakładce API znajdziesz klucz publiczny i klucz prywatny
-- Przejdź do panelu administracyjnego Wordpress, w zakładce Pluginy kliknij Aktywuj przy pozycji Webnalist
-- Po lewej stronie znajdziesz nowy link „Webnalist”
+- Wróć do panelu administracynego Wordpress, po lewej stronie znajdziesz nowy link „Webnalist”
 - Kliknij link Webnalist i wypełnij formularz konfiguracyjny. Przepisz klucz publiczny oraz klucz prywatny z panelu wydawcy, podaj czy nowo tworzone artykuły mają być domyślnie płatne i jaka ma być domyślna kwota za artykułu.
 
 ## Dodawanie i edycja artykułu
