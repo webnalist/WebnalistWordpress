@@ -364,7 +364,7 @@ function wn_options_page()
 function wn_item_class()
 {
     return [
-        'wn-item'
+        'wn-post'
     ];
 }
 
