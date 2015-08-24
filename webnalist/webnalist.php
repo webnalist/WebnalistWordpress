@@ -342,7 +342,6 @@ function wn_settings_section_callback()
 {
     echo __('Requests for the merchant account: admin@webnalist.com', 'webnalist');
 }
-
 function wn_options_page()
 {
     ?>
