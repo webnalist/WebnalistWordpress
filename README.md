@@ -16,3 +16,6 @@
 - Następnie przejdź do panelu wydawcy na https://merchant.webnalist.com i [dodaj artykuł](https://webnalist.com/merchant/docs/index.html#articles) ze skopiowanym wcześniej linkiem.
 - Gotowe. Teraz artykuł oznaczony jako płatny będzie posiadał link z ceną. Użytkownik, który kliknie na link i wyrazi zgodę na obciążenie konta ceną artykułu otrzyma dostęp do płatnej treści.
 - Pisz ciekawe teksty i zarabiaj z Webnalist :)
+
+### Zobacz również:
+[Informacje dla dziennikarzy](https://webnalist.com/journalists)
