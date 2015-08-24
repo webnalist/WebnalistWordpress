@@ -363,7 +363,9 @@ function wn_options_page()
 
 function wn_item_class()
 {
-    return 'wn-item';
+    return [
+        'wn-item'
+    ];
 }
 
 if (is_admin()) {
