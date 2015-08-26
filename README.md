@@ -1,5 +1,7 @@
 #Webnalist Wordpress Plugin
 
+*Przed rozpoczęciem współpracy* załóż konto w serwisie [webnalist.com](https://webnalist.com) i skontaktuj się z nami kontakt@webnalist.com w celu podpisania umowy o współpracy i przydzieleniu uprawnień autora/wydawcy.
+
 ## Instrukcja instalacji:
 1. [Pobierz plugin](https://github.com/webnalist/WebnalistWordpress/archive/master.zip)
 2. Wypakuj pobrany plik do katalogu z instalacją Wordpress tak by katalog *webnalist* z archiwum znajdował się w katalogu *wp-content/plugins*
