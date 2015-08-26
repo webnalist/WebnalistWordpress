@@ -1,6 +1,6 @@
 #Webnalist Wordpress Plugin
 
-*Przed rozpoczęciem współpracy* załóż konto w serwisie [webnalist.com](https://webnalist.com) i  [https://webnalist.com/kontakt](skontaktuj się z nami).
+*Przed rozpoczęciem współpracy* załóż konto w serwisie [webnalist.com](https://webnalist.com) i  [skontaktuj się z nami](https://webnalist.com/kontakt).
 Po podpisania umowy o współpracy przydzielimy Ci uprawnień autora/wydawcy umożliwiające integrację.
 
 ## Instrukcja instalacji:
