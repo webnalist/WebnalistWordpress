@@ -1,7 +1,7 @@
 #Webnalist Wordpress Plugin
 
 *Przed rozpoczęciem* załóż konto w serwisie [webnalist.com](https://webnalist.com) i  [skontaktuj się z nami](https://webnalist.com/kontakt).
-Po podpisania umowy o współpracy przydzielimy Ci uprawnień autora/wydawcy umożliwiające integrację.
+w celu przydzielenia uprawnień autora/wydawcy.
 
 ## Instrukcja instalacji:
 1. [Pobierz plugin](https://github.com/webnalist/WebnalistWordpress/archive/master.zip)
