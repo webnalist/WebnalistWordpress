@@ -363,9 +363,9 @@ function wn_options_page()
 
 function wn_item_class()
 {
-    return [
+    return array(
         'wn-post'
-    ];
+    );
 }
 
 if (is_admin()) {
