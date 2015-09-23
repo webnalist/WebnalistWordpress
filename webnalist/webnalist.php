@@ -143,6 +143,7 @@ function wn_post_meta_box($object, $box)
     </p>
     <h3><?php _e("Płatna treść dostępna po zapłacie", 'webnalist'); ?></h3>
     <?php
+    echo wp_editor(esc_attr($paidContent), 'wn_paid_content');
     echo wp_editor($paidContent, 'wn_paid_content');
 
 }
