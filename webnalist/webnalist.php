@@ -70,7 +70,7 @@ function wn_add_post_meta_boxes()
 {
     add_meta_box(
         'wn_price',      // Unique ID
-        esc_html__('Earn money with Webnalist.com', 'webnalist'),    // Title
+        esc_html__('Zarabiaj z Webnalist', 'webnalist'),    // Title
         'wn_post_meta_box',   // Callback function
         'post',         // Admin page (or post type)
         'normal',         // Context
@@ -125,7 +125,7 @@ function wn_post_meta_box($object, $box)
     );
     ?>
     <p>
-        <label for="wn-post-status"><?php _e("Webnalist payment status", 'webnalist'); ?></label>
+        <label for="wn-post-status"><?php _e("Status płatności", 'webnalist'); ?></label>
         <br/>
         <select class="widefat" name="wn-post-status" id="wn-post-status">
             <?php foreach ($statuses as $status => $name) : ?>
@@ -136,14 +136,14 @@ function wn_post_meta_box($object, $box)
     </p>
     <p>
         <label
-            for="wn-post-price"><?php _e("Post price in PLN/100 (grosz), '150' = 1,50zł. From 1 to 700.", 'webnalist'); ?></label>
+            for="wn-post-price"><?php _e("Cena w PLN/100 (grosz), '150' = 1,50zł. Od 1 do 700.", 'webnalist'); ?></label>
         <br/>
         <input maxlength="3" type="number" step="1" min="1" max="700" name="wn-post-price" id="wn-post-price"
                value="<?php echo esc_attr($price); ?>" size="30"/>
     </p>
-    <h3><?php _e("Restricted paid content", 'webnalist'); ?></h3>
+    <h3><?php _e("Płatna treść dostępna po zapłacie", 'webnalist'); ?></h3>
     <?php
-    echo wp_editor(esc_attr($paidContent), 'wn_paid_content');
+    echo wp_editor($paidContent, 'wn_paid_content');
 
 }
 
