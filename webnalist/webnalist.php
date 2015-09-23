@@ -120,8 +120,8 @@ function wn_post_meta_box($object, $box)
     }
 
     $statuses = array(
-        0 => 'Free article',
-        1 => 'Paid article',
+        0 => 'Darmowy artykuł',
+        1 => 'Płatny artykuł',
     );
     ?>
     <p>
