@@ -2,7 +2,7 @@
 
 # Abandoned
 This plugin is no longer supported in current API.
-Ta wtyczka nie jest już wspierana i nie dizała w nowych wersjach API.
+Ta wtyczka nie jest już wspierana i nie działa w nowych wersjach API.
 
 *Przed rozpoczęciem* załóż konto w serwisie [webnalist.com](https://webnalist.com) i  [skontaktuj się z nami](https://webnalist.com/kontakt).
 w celu przydzielenia uprawnień autora/wydawcy.
